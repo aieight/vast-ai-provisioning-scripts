@@ -39,12 +39,6 @@ LORA_MODELS=(
     "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pktrainer_F1-v1-0.safetensors"
 )
 LORA_PATH="${COMFYUI_DIR}/models/loras"
-mkdir -p "${LORA_PATH}" # Ensure directory exists
-for lora in "${LORA_MODELS[@]}"; do
-    #wget -O "${LORA_PATH}/${lora##*/}" "${lora}"
-    wget -O "${LORA_PATH}/" "${lora}"
-done
-
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -55,6 +49,11 @@ function provisioning_start() {
     provisioning_get_pip_packages
     workflows_dir="${COMFYUI_DIR}/user/default/workflows"
     mkdir -p "${workflows_dir}"
+    mkdir -p "${LORA_PATH}" # Ensure directory exists
+    for lora in "${LORA_MODELS[@]}"; do
+        wget -O "${LORA_PATH}/${lora##*/}" "${lora}"
+        # wget -O "${LORA_PATH}/" "${lora}"
+    done
     provisioning_get_files \
         "${workflows_dir}" \
         "${WORKFLOWS[@]}"
