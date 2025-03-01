@@ -36,7 +36,7 @@ VAE_MODELS=(
 )
 
 LORA_MODELS=(
-    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pokemon_trainer_sprites_pixelart_flux.safetensors"
+    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/blob/main/pktrainer_F1-v1-0.safetensors"
 )
 LORA_PATH="${COMFYUI_DIR}/models/loras"
 mkdir -p "${LORA_PATH}" # Ensure directory exists
