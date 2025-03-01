@@ -40,6 +40,10 @@ LORA_MODELS=(
 )
 LORA_PATH="${COMFYUI_DIR}/models/loras"
 mkdir -p "${LORA_PATH}" # Ensure directory exists
+for lora in "${LORA_MODELS[@]}"; do
+    #wget -O "${LORA_PATH}/${lora##*/}" "${lora}"
+    wget -O "${LORA_PATH}/" "${lora}"
+done
 
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
@@ -72,9 +76,6 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/clip" \
         "${CLIP_MODELS[@]}"
-    provisioning_get_files \
-        "${COMFYUI_DIR}/models/loras" \
-        "${LORA_MODELS[@]}"
     provisioning_print_end
 }
 
