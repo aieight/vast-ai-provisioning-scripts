@@ -36,7 +36,7 @@ VAE_MODELS=(
 )
 
 LORA_MODELS=(
-    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pktrainer_F1-v1-0.safetensors", # Pokemon Trainer Pixel Style
+    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pktrainer_F1-v1-0.safetensors" # Pokemon Trainer Pixel Style
     "https://huggingface.co/renderartist/retrocomicflux/resolve/main/Retro_Comic_Flux_v2_renderartist.safetensors" # Retro Style
 )
 
