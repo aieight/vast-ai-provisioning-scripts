@@ -36,9 +36,19 @@ VAE_MODELS=(
 )
 
 LORA_MODELS=(
-    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pktrainer_F1-v1-0.safetensors"
+    "https://huggingface.co/sWizad/pokemon-trainer-sprites-pixelart-flux/resolve/main/pktrainer_F1-v1-0.safetensors", # Pokemon Trainer Pixel Style
+    "https://huggingface.co/renderartist/retrocomicflux/resolve/main/Retro_Comic_Flux_v2_renderartist.safetensors" # Retro Style
 )
-LORA_PATH="${COMFYUI_DIR}/models/loras"
+
+CUSTOM_WORKFLOWS=(
+    "https://raw.githubusercontent.com/aieight/vast-ai-provisioning-scripts/refs/heads/main/flux-custom-lora-wkflw.json" # Basic Lora Workflow
+)
+
+
+CUSTOM_NODES=(
+    "https://raw.githubusercontent.com/aieight/vast-ai-provisioning-scripts/refs/heads/main/Custom-LoRA-Loader-Model-Only-Switch.py" # Custom LoRA Loader (Enable/Disable Model & Clip)
+)
+
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -49,11 +59,6 @@ function provisioning_start() {
     provisioning_get_pip_packages
     workflows_dir="${COMFYUI_DIR}/user/default/workflows"
     mkdir -p "${workflows_dir}"
-    mkdir -p "${LORA_PATH}" # Ensure directory exists
-    for lora in "${LORA_MODELS[@]}"; do
-        wget -O "${LORA_PATH}/${lora##*/}" "${lora}"
-        # wget -O "${LORA_PATH}/" "${lora}"
-    done
     provisioning_get_files \
         "${workflows_dir}" \
         "${WORKFLOWS[@]}"
@@ -75,6 +80,19 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/clip" \
         "${CLIP_MODELS[@]}"
+    #### CUSTOM CODE ####
+    LORA_PATH="${COMFYUI_DIR}/models/loras"
+    CUSTOM_NODES_PATH="${COMFYUI_DIR}/custom_nodes"
+    mkdir -p "${LORA_PATH}" # Ensure directory exists
+    for workflow in "${CUSTOM_WORKFLOWS[@]}"; do
+        wget -O "${COMFYUI_DIR}/user/default/workflows/${workflow##*/}" "${workflow}"
+    done
+    for lora in "${LORA_MODELS[@]}"; do
+        wget -O "${LORA_PATH}/${lora##*/}" "${lora}"
+    done
+    for custom_node in "${CUSTOM_NODES[@]}"; do
+        wget -O "${CUSTOM_NODES_PATH}/${custom_node##*/}" "${custom_node}"
+    done
     provisioning_print_end
 }
 
