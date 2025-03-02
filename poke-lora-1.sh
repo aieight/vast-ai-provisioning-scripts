@@ -44,7 +44,6 @@ CUSTOM_WORKFLOWS=(
     "https://raw.githubusercontent.com/aieight/vast-ai-provisioning-scripts/refs/heads/main/flux-custom-lora-wkflw.json" # Basic Lora Workflow
 )
 
-
 CUSTOM_NODES=(
     "https://raw.githubusercontent.com/aieight/vast-ai-provisioning-scripts/refs/heads/main/Custom-LoRA-Loader-Model-Only-Switch.py" # Custom LoRA Loader (Enable/Disable Model & Clip)
 )
